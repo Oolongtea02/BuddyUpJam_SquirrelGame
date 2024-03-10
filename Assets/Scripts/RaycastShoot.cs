@@ -27,7 +27,7 @@ public class RaycastShoot : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Transform.objectHit = hit.transform;
+            Transform objectHit = hit.transform;
             Debug.Log(hit.transform.name);
         }
     }
