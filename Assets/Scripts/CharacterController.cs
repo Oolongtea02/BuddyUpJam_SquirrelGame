@@ -8,7 +8,7 @@ public class NewBehaviourScript : MonoBehaviour
     float acceleration = 30.0f;
     SpriteRenderer sprite;
 
-    public RaycastShoot SeedPrefab;
+    public SeedBehavior SeedPrefab;
     public Transform LaunchOffset;
     
     void Start()
@@ -43,8 +43,31 @@ public class NewBehaviourScript : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
-            Instantiate(SeedPrefab, LaunchOffset.position, transform.rotation);
-            Debug.Log("space key was pressed");
+            SeedBehavior seed = Instantiate(SeedPrefab, LaunchOffset.position, transform.rotation);
+
+            //Determine the direction based on input keys
+            Vector2 direction = Vector2.right;
+            if (Input.GetKey("up"))
+           	{
+           		direction = Vector2.up;
+           	}
+           	else if (Input.GetKey("down"))
+           	{
+           		direction = -Vector2.up;
+           	}
+           	else if (Input.GetKey("right"))
+           	{
+           		direction = Vector2.right;
+           	}
+           	else if (Input.GetKey("left"))
+           	{
+           		direction = -Vector2.right;
+           	}
+
+           	//Set the direction of the seed
+           	seed.SetDirection(direction);
+
+           	Debug.Log("space key was pressed");
         }
     }
 }

@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaycastShoot : MonoBehaviour
+public class SeedBehavior : MonoBehaviour
 {
 	public float speed = 4.5f;
+    private Vector2 direction = Vector2.right;
+
+    public void SetDirection(Vector2 dir)
+    {
+        direction = dir.normalized;
+    }
     // Update is called once per frame
     private void Update()
     {
-       transform.position += transform.right * Time.deltaTime * speed;
+       transform.position += (Vector3)direction * Time.deltaTime * speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
