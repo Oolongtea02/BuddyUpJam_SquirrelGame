@@ -4,31 +4,15 @@ using UnityEngine;
 
 public class RaycastShoot : MonoBehaviour
 {
-    private Camera _mainCamera;
-    // Start is called before the first frame update
-    void Start()
-    {
-        _mainCamera = Camera.main;
-    }
-
+	public float speed = 4.5f;
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
-        }
+       transform.position += transform.right * Time.deltaTime * speed;
     }
 
-    private void Fire()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        RaycastHit hit;
-        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            Transform objectHit = hit.transform;
-            Debug.Log(hit.transform.name);
-        }
+    	Destroy(gameObject);
     }
 }

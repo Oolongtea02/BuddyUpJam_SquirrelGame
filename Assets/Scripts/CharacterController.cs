@@ -7,6 +7,9 @@ public class NewBehaviourScript : MonoBehaviour
     Rigidbody m_Rigidbody;
     float acceleration = 30.0f;
     SpriteRenderer sprite;
+
+    public RaycastShoot SeedPrefab;
+    public Transform LaunchOffset;
     
     void Start()
     {
@@ -36,6 +39,12 @@ public class NewBehaviourScript : MonoBehaviour
             m_Rigidbody.AddForce(transform.right * -acceleration);
             if (!Input.GetKey("right"))
             { sprite.flipX = true; }
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            Instantiate(SeedPrefab, LaunchOffset.position, transform.rotation);
+            Debug.Log("space key was pressed");
         }
     }
 }
