@@ -13,6 +13,11 @@ public class LogRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         transform.Rotate (0,0,50*Time.deltaTime);
+        if (Input.GetKey(KeyCode.R))
+        {
+            transform.Rotate(0, 0, 25 * Time.deltaTime);
+            Debug.Log("r key was pressed");
+        }
+       
     }
 }
