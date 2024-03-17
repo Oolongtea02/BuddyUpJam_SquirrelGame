@@ -10,12 +10,18 @@ public class NewBehaviourScript : MonoBehaviour
 
     public SeedBehavior SeedPrefab;
     public Transform LaunchOffset;
+
+    //Audio
+    private SFXManager SFXManagerScript;
     
     void Start()
     {
         //Fetch the Rigidbody from the GameObject with this script attached
         m_Rigidbody = GetComponent<Rigidbody>();
         sprite = GetComponent<SpriteRenderer>();
+
+        //Access the SFXManager script
+        SFXManagerScript = GameObject.Find("SFXManager").GetComponent<SFXManager>();
     }
 
     void FixedUpdate()
@@ -39,6 +45,12 @@ public class NewBehaviourScript : MonoBehaviour
             m_Rigidbody.AddForce(transform.right * -acceleration);
             if (!Input.GetKey("right"))
             { sprite.flipX = true; }
+        }
+
+        //Play Footstep SFX
+        if (Input.GetKey("up") || Input.GetKey("down") || Input.GetKey("right") || Input.GetKey("left"))
+        {
+            SFXManagerScript.PlaySFX_Footstep();
         }
 
         if (Input.GetKeyDown("space"))
@@ -66,6 +78,9 @@ public class NewBehaviourScript : MonoBehaviour
 
            	//Set the direction of the seed
            	seed.SetDirection(direction);
+
+            //Play Push SFX
+            SFXManagerScript.PlaySFX_Push();
 
            	Debug.Log("space key was pressed");
         }
