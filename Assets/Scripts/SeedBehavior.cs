@@ -17,8 +17,12 @@ public class SeedBehavior : MonoBehaviour
        transform.position += (Vector3)direction * Time.deltaTime * speed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
+        /*if(collision.FindGameObjectsWithTag("Finish"))
+        {
+            GoalAnim.SetTrigger("Goal");
+        }*/
     	Destroy(gameObject);
     }
 }
